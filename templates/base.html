@@ -6,8 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block meta %}{% endblock %}
   <title>Habit Tracker - {% block title %}Home{% endblock %}</title>
+  <style>
+    body {
+      background-color: orange;
+      color: green;
+      font-family: "Papyrus", fantasy;
+    }
+    .header {
+      font-weight: bold;
+      font-size: 500%;
+    }
+  </style>
 </head>
 <body>
+  <h1 class="header">Habit Tracker</h1>
   {% block content %}
   {% endblock %}
 </body>
