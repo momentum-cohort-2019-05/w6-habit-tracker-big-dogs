@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Update your daily record</h1>
+<form action="" method="POST">
+  {% csrf_token %}
+  <p>On {{ record.date }}, I did {{ habit.verb }}</p>
+  <p><input type="number" id="{{ form.quantity.id_for_label }}" name="{{ form.quantity.html_name }}" value="{{ form.quantity.value }}"></p>
+  <p>{{ habit.noun }}.</p>
+  <button type="submit">Update record</button>
+</form>
+{% endblock %}

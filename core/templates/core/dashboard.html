@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your goals</h1>
+
+  {% for habit in habits %}
+    <div>
+      <div>{{ habit }}</div>
+      <div>Last updated at: {{ habit.last_updated }}</div>
+      <p><a href="{% url 'daily-record' habit_pk=habit.pk year=today.year month=today.month day=today.day %}">Update today's record</a></p>
+    </div>
+  {% endfor %}
+{% endblock %}
