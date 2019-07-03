@@ -20,7 +20,7 @@ from core import views as core_views
 
 urlpatterns = [
     path('', core_views.dashboard, name='dashboard'),
-    path('habits/<int:habit_pk>/<int:year>/<int:month>/<int:day>/',
+    path('habits/<int:habit_pk>/records/',
          core_views.update_daily_record,
          name="daily-record"),
     path('admin/', admin.site.urls),

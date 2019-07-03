@@ -4,8 +4,18 @@
 <h1>Update your daily record</h1>
 <form action="" method="POST">
   {% csrf_token %}
-  <p>On {{ record.date }}, I did {{ habit.verb }}</p>
-  <p><input type="number" id="{{ form.quantity.id_for_label }}" name="{{ form.quantity.html_name }}" value="{{ form.quantity.value }}"></p>
+  <p>On</p>
+  <p><input type="date" 
+    id="{{ form.date.id_for_label }}" 
+    name="{{ form.date.html_name }}" 
+    value="{{ form.date.value|date:"Y-m-d" }}"
+    aria-label="{{ form.date.label }}"></p>
+  <p>I did {{ habit.verb }}</p>
+  <p><input type="number" 
+    id="{{ form.quantity.id_for_label }}" 
+    name="{{ form.quantity.html_name }}" 
+    value="{{ form.quantity.value }}"
+    aria-label="{{ form.quantity.label }}"></p>
   <p>{{ habit.noun }}.</p>
   <button type="submit">Update record</button>
 </form>

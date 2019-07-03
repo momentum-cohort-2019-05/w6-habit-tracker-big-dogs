@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from core.models import DailyRecord
@@ -18,17 +18,22 @@ def dashboard(request):
 
 
 @login_required
-def update_daily_record(request, habit_pk, year, month, day):
+def update_daily_record(request, habit_pk):
     habit = get_object_or_404(request.user.habits, pk=habit_pk)
+    record_date = request.POST.get('date', date.today())
     try:
-        record = habit.daily_records.get(date=date(year, month, day))
+        record = habit.daily_records.get(date=record_date)
     except DailyRecord.DoesNotExist:
-        record = DailyRecord(habit=habit, date=date(year, month, day))
+        record = DailyRecord(habit=habit, date=record_date)
 
-    form = DailyRecordForm(data=request.POST, instance=record)
+    if request.method == "POST":
+        form = DailyRecordForm(data=request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            return redirect(to='dashboard')
+    else:
+        form = DailyRecordForm(instance=record)
 
-    if request.method == "POST" and form.is_valid():
-        record = form.save()
     return render(request, "core/update_record.html", {
         "habit": habit,
         "record": record,

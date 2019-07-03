@@ -6,4 +6,7 @@ class DailyRecordForm(forms.ModelForm):
 
     class Meta:
         model = DailyRecord
-        fields = ['quantity']
+        fields = [
+            'quantity',
+            'date',
+        ]
